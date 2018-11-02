@@ -26,5 +26,6 @@ export const generateQuestions = (value = 10) => {
   for (let i = 0; i < value; i++) {
     array.push(createQuestion(i))
   }
+
   return array
 }

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import Question from './Question'
 import { generateQuestions } from './stubs/data'
@@ -13,6 +14,7 @@ class QuestionsContainer extends React.Component {
 
   constructor(props) {
     super(props)
+    console.log('2sadasd', props)
     this.state = {
       modalHidden: true,
       modalQuestion: {
@@ -25,6 +27,10 @@ class QuestionsContainer extends React.Component {
     this.hideModal = this.hideModal.bind(this)
     this.changeQuestion = this.changeQuestion.bind(this)
     this.updateQuestion = this.updateQuestion.bind(this)
+  }
+
+  componentWillReceiveProps(props) {
+    console.log('componentWillReceiveProps', props)
   }
 
   showModal() {
@@ -62,15 +68,23 @@ class QuestionsContainer extends React.Component {
     this.hideModal()
   }
 
+  renderQuestions() {
+    if (this.props.questions) {
+      return (
+        this.props.questions.map(object => {
+          return <Question key={object.id} data={object} change={this.changeQuestion} />
+        })
+      )
+    }
+  }
+
   render() {
     return (
       <div>
         <div style={centerSingleContainer}>
-          {generateQuestions(10).map(object => {
-            return <Question key={object.id} data={object} change={this.changeQuestion} />
-          })}
+          {this.renderQuestions()}
         </div>
-        <QuestionModal 
+        <QuestionModal
           data={this.state.modalQuestion}
           visible={this.state.modalHidden}
           hideModal={this.hideModal}

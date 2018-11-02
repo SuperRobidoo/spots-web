@@ -35,7 +35,7 @@ class QuestionModal extends React.Component {
   }
   updateSet(e) {
     const rexEx = /^[0-9\b]+$/;
-    if (e.target.value == '' || rexEx.test(e.target.value)) {
+    if (e.target.value === '' || rexEx.test(e.target.value)) {
       this.setState({ set: e.target.value })
     }
   }
